@@ -32,7 +32,7 @@ library(data.table)
 #  
 #  
 
-ORACLE_JDBC_PATH = "/Users/aurelio/bin/oracle/ojdbc6.jar"
+ORACLE_JDBC_PATH = "" # path to your ojdbc6.jar file
 drv <- JDBC("oracle.jdbc.OracleDriver",classPath = ORACLE_JDBC_PATH)
 con <- dbConnect(drv, "") # Ask Ash for the details of the connection
 
@@ -86,7 +86,7 @@ sql1 <- "select u.uniprot_acc, ff.superfamily_id, ff.funfam_number from cath_v4_
 
 all_mda <- data.table(dbGetQuery(con, sql1))
 
-all_mda <- all_mda %>% mutate(FunFam_ID = paste(SUPERFAMILY_ID, FUNFAM_NUMBER, sep = ".FF")) ## This is used with the DFX FunFams
+# all_mda <- all_mda %>% mutate(FunFam_ID = paste(SUPERFAMILY_ID, FUNFAM_NUMBER, sep = ".FF")) ## This is used with the DFX FunFams
 all_mda <- all_mda %>% mutate(FunFam_ID = paste(SUPERFAMILY_ID, FUNFAM_NUMBER, sep = "_")) ## This is used with the FunFHMMER FunFams
 all_mda <- all_mda %>% select(FunFam_ID, UNIPROT_ACC)
 
